@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Home(props) {
   return (
@@ -7,9 +8,9 @@ function Home(props) {
         <a className="btn btn-primary btn-sm m-2" href="">
           Download Data in CSV
         </a>
-        <a className="btn btn-primary btn-sm m-2" href="">
+        <Link className="btn btn-primary btn-sm m-2" to="view-data">
           View Data
-        </a>
+        </Link>
       </div>
       <form>
         <label className="form-label mt-2 mb-0" htmlFor="date">
@@ -66,7 +67,7 @@ function Home(props) {
             </button>
           </fieldset>
           <div className="col col-6">
-            <table className="table">
+            <table className="table create-data-table">
               <thead>
                 <tr>
                   <th>Material</th>
@@ -79,112 +80,112 @@ function Home(props) {
                   <td>Eyehook</td>
                   <td>4 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>Trf.Oil</td>
                   <td>10 L</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>IPC P4</td>
                   <td>10 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>LT Tape</td>
                   <td>2 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>Eyehook</td>
                   <td>4 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>Trf.Oil</td>
                   <td>10 L</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>IPC P4</td>
                   <td>10 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>LT Tape</td>
                   <td>2 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>Eyehook</td>
                   <td>4 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>Trf.Oil</td>
                   <td>10 L</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>IPC P4</td>
                   <td>10 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>LT Tape</td>
                   <td>2 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>Eyehook</td>
                   <td>4 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>Trf.Oil</td>
                   <td>10 L</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>IPC P4</td>
                   <td>10 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
                 <tr>
                   <td>LT Tape</td>
                   <td>2 EA</td>
                   <td>
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                   </td>
                 </tr>
               </tbody>

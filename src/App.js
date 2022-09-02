@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "./App.css";
 import NavBar from "./components/common/navBar";
 import Home from "./components/home";
+import ViewData from "./components/viewData";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/view-data" exact component={ViewData} />
       </Switch>
     </div>
   );

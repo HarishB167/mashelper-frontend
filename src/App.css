@@ -8,6 +8,12 @@ body {
     #ffffff
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #ece9e6, #ffffff);
+  padding-top: 4.5rem;
+}
+
+.main-container,
+.container {
+  height: 100%;
 }
 
 @media screen and (min-width: 550px) {
@@ -45,7 +51,7 @@ body {
 }
 
 /* Styles for table */
-.table {
+.create-data-table {
   height: 50vh;
   overflow-y: scroll;
   display: inline-block;
@@ -53,7 +59,16 @@ body {
 }
 
 @media screen and (min-width: 400px) {
-  .table {
+  .create-data-table {
     font-size: 1rem;
   }
+}
+
+.view-data-table {
+  width: 100%;
+  overflow: auto;
+}
+
+.fs-7 {
+  font-size: 0.9rem;
 }
