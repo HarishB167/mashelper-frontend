@@ -400,3 +400,406 @@ export const data = [
     unit: "ROL",
   },
 ];
+
+export const materials = [
+  {
+    id: 1,
+    materialName: "Glass",
+  },
+  {
+    id: 2,
+    materialName: "Granite",
+  },
+  {
+    id: 3,
+    materialName: "Aluminum",
+  },
+  {
+    id: 4,
+    materialName: "Wood",
+  },
+  {
+    id: 5,
+    materialName: "Brass",
+  },
+  {
+    id: 6,
+    materialName: "Vinyl",
+  },
+  {
+    id: 7,
+    materialName: "Stone",
+  },
+  {
+    id: 8,
+    materialName: "Granite",
+  },
+  {
+    id: 9,
+    materialName: "Vinyl",
+  },
+  {
+    id: 10,
+    materialName: "Brass",
+  },
+  {
+    id: 11,
+    materialName: "Granite",
+  },
+  {
+    id: 12,
+    materialName: "Wood",
+  },
+  {
+    id: 13,
+    materialName: "Glass",
+  },
+  {
+    id: 14,
+    materialName: "Glass",
+  },
+  {
+    id: 15,
+    materialName: "Vinyl",
+  },
+  {
+    id: 16,
+    materialName: "Aluminum",
+  },
+  {
+    id: 17,
+    materialName: "Plastic",
+  },
+  {
+    id: 18,
+    materialName: "Glass",
+  },
+  {
+    id: 19,
+    materialName: "Wood",
+  },
+  {
+    id: 20,
+    materialName: "Plastic",
+  },
+  {
+    id: 21,
+    materialName: "Glass",
+  },
+  {
+    id: 22,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 23,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 24,
+    materialName: "Glass",
+  },
+  {
+    id: 25,
+    materialName: "Plastic",
+  },
+  {
+    id: 26,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 27,
+    materialName: "Wood",
+  },
+  {
+    id: 28,
+    materialName: "Steel",
+  },
+  {
+    id: 29,
+    materialName: "Aluminum",
+  },
+  {
+    id: 30,
+    materialName: "Glass",
+  },
+  {
+    id: 31,
+    materialName: "Aluminum",
+  },
+  {
+    id: 32,
+    materialName: "Wood",
+  },
+  {
+    id: 33,
+    materialName: "Vinyl",
+  },
+  {
+    id: 34,
+    materialName: "Steel",
+  },
+  {
+    id: 35,
+    materialName: "Brass",
+  },
+  {
+    id: 36,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 37,
+    materialName: "Steel",
+  },
+  {
+    id: 38,
+    materialName: "Brass",
+  },
+  {
+    id: 39,
+    materialName: "Steel",
+  },
+  {
+    id: 40,
+    materialName: "Steel",
+  },
+  {
+    id: 41,
+    materialName: "Granite",
+  },
+  {
+    id: 42,
+    materialName: "Glass",
+  },
+  {
+    id: 43,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 44,
+    materialName: "Wood",
+  },
+  {
+    id: 45,
+    materialName: "Aluminum",
+  },
+  {
+    id: 46,
+    materialName: "Steel",
+  },
+  {
+    id: 47,
+    materialName: "Wood",
+  },
+  {
+    id: 48,
+    materialName: "Rubber",
+  },
+  {
+    id: 49,
+    materialName: "Stone",
+  },
+  {
+    id: 50,
+    materialName: "Steel",
+  },
+  {
+    id: 51,
+    materialName: "Vinyl",
+  },
+  {
+    id: 52,
+    materialName: "Rubber",
+  },
+  {
+    id: 53,
+    materialName: "Glass",
+  },
+  {
+    id: 54,
+    materialName: "Rubber",
+  },
+  {
+    id: 55,
+    materialName: "Vinyl",
+  },
+  {
+    id: 56,
+    materialName: "Glass",
+  },
+  {
+    id: 57,
+    materialName: "Wood",
+  },
+  {
+    id: 58,
+    materialName: "Brass",
+  },
+  {
+    id: 59,
+    materialName: "Stone",
+  },
+  {
+    id: 60,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 61,
+    materialName: "Plastic",
+  },
+  {
+    id: 62,
+    materialName: "Rubber",
+  },
+  {
+    id: 63,
+    materialName: "Aluminum",
+  },
+  {
+    id: 64,
+    materialName: "Wood",
+  },
+  {
+    id: 65,
+    materialName: "Stone",
+  },
+  {
+    id: 66,
+    materialName: "Vinyl",
+  },
+  {
+    id: 67,
+    materialName: "Steel",
+  },
+  {
+    id: 68,
+    materialName: "Rubber",
+  },
+  {
+    id: 69,
+    materialName: "Granite",
+  },
+  {
+    id: 70,
+    materialName: "Granite",
+  },
+  {
+    id: 71,
+    materialName: "Brass",
+  },
+  {
+    id: 72,
+    materialName: "Granite",
+  },
+  {
+    id: 73,
+    materialName: "Stone",
+  },
+  {
+    id: 74,
+    materialName: "Aluminum",
+  },
+  {
+    id: 75,
+    materialName: "Vinyl",
+  },
+  {
+    id: 76,
+    materialName: "Plastic",
+  },
+  {
+    id: 77,
+    materialName: "Rubber",
+  },
+  {
+    id: 78,
+    materialName: "Stone",
+  },
+  {
+    id: 79,
+    materialName: "Aluminum",
+  },
+  {
+    id: 80,
+    materialName: "Vinyl",
+  },
+  {
+    id: 81,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 82,
+    materialName: "Vinyl",
+  },
+  {
+    id: 83,
+    materialName: "Plastic",
+  },
+  {
+    id: 84,
+    materialName: "Granite",
+  },
+  {
+    id: 85,
+    materialName: "Rubber",
+  },
+  {
+    id: 86,
+    materialName: "Granite",
+  },
+  {
+    id: 87,
+    materialName: "Aluminum",
+  },
+  {
+    id: 88,
+    materialName: "Granite",
+  },
+  {
+    id: 89,
+    materialName: "Aluminum",
+  },
+  {
+    id: 90,
+    materialName: "Vinyl",
+  },
+  {
+    id: 91,
+    materialName: "Granite",
+  },
+  {
+    id: 92,
+    materialName: "Wood",
+  },
+  {
+    id: 93,
+    materialName: "Plexiglass",
+  },
+  {
+    id: 94,
+    materialName: "Vinyl",
+  },
+  {
+    id: 95,
+    materialName: "Vinyl",
+  },
+  {
+    id: 96,
+    materialName: "Steel",
+  },
+  {
+    id: 97,
+    materialName: "Glass",
+  },
+  {
+    id: 98,
+    materialName: "Glass",
+  },
+  {
+    id: 99,
+    materialName: "Stone",
+  },
+  {
+    id: 100,
+    materialName: "Brass",
+  },
+];

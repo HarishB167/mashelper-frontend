@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { materials } from "./fakeDataService";
 
 function Home(props) {
   return (
@@ -31,12 +32,12 @@ function Home(props) {
             <label className="form-label mt-2 mb-0" htmlFor="material">
               Material Name
             </label>
-            <input
-              className="form-control"
-              name="material"
-              type="text"
-              required
-            />
+            <select name="material" className="form-control" required>
+              <option value="">Select material...</option>
+              {materials.map((mat) => (
+                <option value={mat.id}>{mat.materialName}</option>
+              ))}
+            </select>
             <label className="form-label mt-2 mb-0" htmlFor="quantity">
               Quantity
             </label>
