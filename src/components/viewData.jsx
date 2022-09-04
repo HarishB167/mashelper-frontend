@@ -1,7 +1,17 @@
-import React from "react";
-import { data } from "./fakeDataService";
+import React, { useEffect, useState } from "react";
+import masApiService from "./services/mashelperBackendService";
 
 function ViewData(props) {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    async function loadMaterialLineItems() {
+      const data = await masApiService.getMaterialLineItems();
+      console.log("data :>> ", data);
+      setData(data);
+    }
+    loadMaterialLineItems();
+  }, []);
+
   return (
     <div className="container container-sm">
       <table className="table view-data-table">
@@ -16,7 +26,7 @@ function ViewData(props) {
         <tbody>
           {data.map((item, idx) => (
             <React.Fragment>
-              <tr>
+              <tr key={`${idx}`}>
                 <td className="text-nowrap fs-7 align-middle">{item.date}</td>
                 <td className=" align-middle">
                   <a
@@ -26,7 +36,7 @@ function ViewData(props) {
                     aria-expanded="false"
                     aria-controls={`collapse${idx}`}
                   >
-                    {item.materialName}
+                    {item.material_name}
                   </a>
                 </td>
                 <td className=" align-middle">
@@ -41,7 +51,7 @@ function ViewData(props) {
                   </div>
                 </td>
               </tr>
-              <tr>
+              <tr key={`${idx}_collapse`}>
                 <td colSpan="4" className="p-0">
                   <div id={`collapse${idx}`} className="collapse">
                     <div className="card card-body">
