@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import $ from "jquery/dist/jquery";
+import Modal from "./common/modal";
 import masApiService from "./services/mashelperBackendService";
 
 function ViewData(props) {
   const [data, setData] = useState([]);
+  const [itemToDelete, setItemToDelete] = useState("");
 
   async function loadMaterialLineItems() {
     const data = await masApiService.getMaterialLineItems();
@@ -14,13 +17,25 @@ function ViewData(props) {
     loadMaterialLineItems();
   }, []);
 
-  const handleDelete = async (id) => {
-    await masApiService.deleteMaterialLineItem(id);
+  const handleEdit = (id) => {
+    console.log("Editing item :", id);
+  };
+
+  const handleDelete = async () => {
+    await masApiService.deleteMaterialLineItem(itemToDelete);
     loadMaterialLineItems();
+    setItemToDelete("");
   };
 
   return (
     <div className="container container-sm">
+      <Modal
+        id="modalPopup"
+        title="Delete"
+        body="Are you sure you want to delete this item?"
+        action={handleDelete}
+        actionMessage="Delete"
+      ></Modal>
       <table className="table view-data-table">
         <thead>
           <tr>
@@ -51,10 +66,17 @@ function ViewData(props) {
                 </td>
                 <td>
                   <div className="d-flex align-items-center flex-column">
-                    <button className="btn btn-warning btn-sm m-1">Edit</button>
+                    <button
+                      onClick={() => handleEdit(item.id)}
+                      className="btn btn-warning btn-sm m-1"
+                    >
+                      Edit
+                    </button>
                     <button
                       className="btn btn-danger btn-sm m-1"
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => setItemToDelete(item.id)}
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalPopup"
                     >
                       Delete
                     </button>
