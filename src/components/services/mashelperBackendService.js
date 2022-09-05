@@ -10,8 +10,18 @@ export async function createMaterialLineItems(lineItems) {
   return result.data;
 }
 
+export async function updateMaterialLineItem(id, lineItem) {
+  const result = await http.put(`/materiallineitem/${id}/`, lineItem);
+  return result.data;
+}
+
 export async function deleteMaterialLineItem(id) {
   const result = await http.delete(`/materiallineitem/${id}/`);
+  return result.data;
+}
+
+export async function getMaterialLineItem(id) {
+  const result = await http.get(`/materiallineitem/${id}/`);
   return result.data;
 }
 
@@ -28,7 +38,9 @@ export async function getMaterialsList() {
 export default {
   getMaterialLineItems,
   createMaterialLineItems,
+  updateMaterialLineItem,
   deleteMaterialLineItem,
+  getMaterialLineItem,
   getUnitsList,
   getMaterialsList,
 };

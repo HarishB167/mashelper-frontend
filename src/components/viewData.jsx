@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import $ from "jquery/dist/jquery";
+import { Link } from "react-router-dom";
 import Modal from "./common/modal";
 import masApiService from "./services/mashelperBackendService";
 
@@ -16,10 +16,6 @@ function ViewData(props) {
   useEffect(() => {
     loadMaterialLineItems();
   }, []);
-
-  const handleEdit = (id) => {
-    console.log("Editing item :", id);
-  };
 
   const handleDelete = async () => {
     await masApiService.deleteMaterialLineItem(itemToDelete);
@@ -66,12 +62,12 @@ function ViewData(props) {
                 </td>
                 <td>
                   <div className="d-flex align-items-center flex-column">
-                    <button
-                      onClick={() => handleEdit(item.id)}
+                    <Link
                       className="btn btn-warning btn-sm m-1"
+                      to={`edit-data/${item.id}`}
                     >
                       Edit
-                    </button>
+                    </Link>
                     <button
                       className="btn btn-danger btn-sm m-1"
                       onClick={() => setItemToDelete(item.id)}
