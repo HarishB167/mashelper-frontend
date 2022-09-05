@@ -11,6 +11,10 @@ body {
   padding-top: 4.5rem;
 }
 
+.c-pointer {
+  cursor: pointer;
+}
+
 .main-container,
 .container {
   height: 100%;

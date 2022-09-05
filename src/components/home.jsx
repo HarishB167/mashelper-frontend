@@ -1,8 +1,98 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { materials } from "./fakeDataService";
+import { toast } from "react-toastify";
+import Joi from "joi-browser";
+import masApiService from "./services/mashelperBackendService";
+
+const schema = {
+  date: Joi.string().required().label("Date"),
+  location: Joi.string().required().label("Location"),
+  remarks: Joi.string().required().label("Remarks"),
+  material_name: Joi.number().required().label("Material Name"),
+  quantity: Joi.number().required().min(0.01).label("Quantity"),
+  unit: Joi.number().required().label("Unit"),
+};
 
 function Home(props) {
+  const [unitsList, setUnitsList] = useState([]);
+  const [materialsList, setMaterialsList] = useState([]);
+  const [currentItem, setCurrentItem] = useState({
+    date: "",
+    location: "",
+    remarks: "",
+    material_name: "",
+    quantity: "",
+    unit: "",
+  });
+  const [itemList, setItemList] = useState([]);
+
+  useEffect(() => {
+    async function loadSelectListData() {
+      const unitsList = await masApiService.getUnitsList();
+      const materialsList = await masApiService.getMaterialsList();
+      setUnitsList(unitsList);
+      setMaterialsList(materialsList);
+    }
+    loadSelectListData();
+  }, []);
+
+  const handleAddItem = (e) => {
+    e.preventDefault();
+    console.log("Adding item to list", currentItem);
+    if (validate()) {
+      toast.error(JSON.stringify(validate()));
+      return false;
+    }
+    setItemList([...itemList, { ...currentItem }]);
+    setCurrentItem({
+      date: "",
+      location: "",
+      remarks: "",
+      material_name: "",
+      quantity: "",
+      unit: "",
+    });
+  };
+  console.log("itemList :>> ", itemList);
+
+  const validate = () => {
+    const result = Joi.validate(currentItem, schema, {
+      abortEarly: false,
+    });
+    if (!result.error) return null;
+
+    const errors = {};
+
+    for (let item of result.error.details) errors[item.path[0]] = item.message;
+
+    return errors;
+  };
+
+  const getMaterialNameForId = (id) => {
+    const material = materialsList.find((mat) => mat.id === Number(id));
+    if (material) return material.name;
+    return "Not found";
+  };
+
+  const getUnitForId = (id) => {
+    const unit = unitsList.find((u) => u.id === Number(id));
+    if (unit) return unit.unit;
+    return "Not found";
+  };
+
+  const convertToViewList = (itemList) => {
+    return itemList.map((item) => {
+      return {
+        date: item.date,
+        location: item.location,
+        remarks: item.remarks,
+        quantity: item.quantity,
+        material_name: getMaterialNameForId(item.material_name),
+        unit: getUnitForId(item.unit),
+      };
+    });
+  };
+
   return (
     <div className="container container-sm">
       <div>
@@ -17,31 +107,78 @@ function Home(props) {
         <label className="form-label mt-2 mb-0" htmlFor="date">
           Date of Issue/Consumption
         </label>
-        <input className="form-control" name="date" type="date" required />
+        <input
+          value={currentItem.date}
+          onChange={(e) =>
+            setCurrentItem({ ...currentItem, date: e.currentTarget.value })
+          }
+          className="form-control"
+          name="date"
+          type="date"
+          required
+        />
         <label className="form-label mt-2 mb-0" htmlFor="location">
           Location
         </label>
-        <input className="form-control" name="location" type="text" required />
+        <input
+          value={currentItem.location}
+          onChange={(e) =>
+            setCurrentItem({ ...currentItem, location: e.currentTarget.value })
+          }
+          className="form-control"
+          name="location"
+          type="text"
+          required
+        />
         <label className="form-label" mt-2 mb-0 htmlFor="remarks">
           Remarks
         </label>
-        <input className="form-control" name="remarks" type="text" required />
+        <input
+          value={currentItem.remarks}
+          onChange={(e) =>
+            setCurrentItem({ ...currentItem, remarks: e.currentTarget.value })
+          }
+          className="form-control"
+          name="remarks"
+          type="text"
+          required
+        />
         <div className="row">
           <fieldset className="col col-6">
             <legend>Add Item</legend>
             <label className="form-label mt-2 mb-0" htmlFor="material">
               Material Name
             </label>
-            <select name="material" className="form-control" required>
+            <select
+              value={currentItem.material_name}
+              onChange={(e) =>
+                setCurrentItem({
+                  ...currentItem,
+                  material_name: e.currentTarget.value,
+                })
+              }
+              name="material"
+              className="form-control"
+              required
+            >
               <option value="">Select material...</option>
-              {materials.map((mat) => (
-                <option value={mat.id}>{mat.materialName}</option>
+              {materialsList.map((mat) => (
+                <option key={mat.id} value={mat.id}>
+                  {mat.name}
+                </option>
               ))}
             </select>
             <label className="form-label mt-2 mb-0" htmlFor="quantity">
               Quantity
             </label>
             <input
+              value={currentItem.quantity}
+              onChange={(e) =>
+                setCurrentItem({
+                  ...currentItem,
+                  quantity: e.currentTarget.value,
+                })
+              }
               className="form-control"
               name="quantity"
               type="number"
@@ -51,21 +188,31 @@ function Home(props) {
             <label className="form-label mt-2 mb-0" htmlFor="unit">
               Unit
             </label>
-            <select className="form-control" name="unit" id="unit" required>
+            <select
+              value={currentItem.unit}
+              onChange={(e) =>
+                setCurrentItem({ ...currentItem, unit: e.currentTarget.value })
+              }
+              className="form-control"
+              name="unit"
+              id="unit"
+              required
+            >
               <option value="">Select unit...</option>
-              <option value="EA">EA</option>
-              <option value="M">M</option>
-              <option value="KG">KG</option>
-              <option value="ROL">ROL</option>
-              <option value="L">L</option>
-              <option value="ST">ST</option>
+              {unitsList.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.unit}
+                </option>
+              ))}
             </select>
-            <button className="btn btn-primary btn-sm m-2" type="submit">
+            <button
+              onClick={handleAddItem}
+              className="btn btn-primary btn-sm m-2"
+              disabled={validate()}
+            >
               Add Item
             </button>
-            <button className="btn btn-primary btn-sm m-2" type="submit">
-              Save
-            </button>
+            <button className="btn btn-primary btn-sm m-2">Save</button>
           </fieldset>
           <div className="col col-6">
             <table className="table create-data-table">
@@ -77,118 +224,24 @@ function Home(props) {
                 </tr>
               </thead>
               <tbody className="table__tbody">
-                <tr>
-                  <td>Eyehook</td>
-                  <td>4 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Trf.Oil</td>
-                  <td>10 L</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>IPC P4</td>
-                  <td>10 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>LT Tape</td>
-                  <td>2 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Eyehook</td>
-                  <td>4 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Trf.Oil</td>
-                  <td>10 L</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>IPC P4</td>
-                  <td>10 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>LT Tape</td>
-                  <td>2 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Eyehook</td>
-                  <td>4 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Trf.Oil</td>
-                  <td>10 L</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>IPC P4</td>
-                  <td>10 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>LT Tape</td>
-                  <td>2 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Eyehook</td>
-                  <td>4 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Trf.Oil</td>
-                  <td>10 L</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>IPC P4</td>
-                  <td>10 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
-                <tr>
-                  <td>LT Tape</td>
-                  <td>2 EA</td>
-                  <td>
-                    <i className="fa fa-times" aria-hidden="true"></i>
-                  </td>
-                </tr>
+                {convertToViewList(itemList).map((item, idx) => (
+                  <tr>
+                    <td>{item.material_name}</td>
+                    <td>
+                      {item.quantity} {item.unit}
+                    </td>
+                    <td>
+                      <i
+                        onClick={() => {
+                          itemList.splice(idx, 1);
+                          setItemList([...itemList]);
+                        }}
+                        className="fa fa-times c-pointer"
+                        aria-hidden="true"
+                      ></i>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

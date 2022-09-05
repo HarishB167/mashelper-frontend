@@ -5,6 +5,18 @@ export async function getMaterialLineItems() {
   return result.data;
 }
 
+export async function getUnitsList() {
+  const result = await http.get("/unit/");
+  return result.data;
+}
+
+export async function getMaterialsList() {
+  const result = await http.get("/material");
+  return result.data;
+}
+
 export default {
   getMaterialLineItems,
+  getUnitsList,
+  getMaterialsList,
 };
