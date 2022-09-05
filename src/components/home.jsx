@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Joi from "joi-browser";
@@ -25,6 +25,7 @@ function Home(props) {
     unit: "",
   });
   const [itemList, setItemList] = useState([]);
+  const dateInput = useRef(null);
 
   useEffect(() => {
     async function loadSelectListData() {
@@ -93,6 +94,18 @@ function Home(props) {
     });
   };
 
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (itemList.length > 0) {
+      const data = await masApiService.createMaterialLineItems(itemList);
+      setItemList([]);
+      toast.success(`${data.length} consumption posted successfully`);
+      dateInput.current.focus();
+    } else {
+      toast.warn("Nothing to save.");
+    }
+  };
+
   return (
     <div className="container container-sm">
       <div>
@@ -108,6 +121,7 @@ function Home(props) {
           Date of Issue/Consumption
         </label>
         <input
+          ref={dateInput}
           value={currentItem.date}
           onChange={(e) =>
             setCurrentItem({ ...currentItem, date: e.currentTarget.value })
@@ -212,7 +226,9 @@ function Home(props) {
             >
               Add Item
             </button>
-            <button className="btn btn-primary btn-sm m-2">Save</button>
+            <button onClick={handleSave} className="btn btn-primary btn-sm m-2">
+              Save
+            </button>
           </fieldset>
           <div className="col col-6">
             <table className="table create-data-table">
