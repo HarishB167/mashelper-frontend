@@ -10,6 +10,11 @@ export async function createMaterialLineItems(lineItems) {
   return result.data;
 }
 
+export async function deleteMaterialLineItem(id) {
+  const result = await http.delete(`/materiallineitem/${id}/`);
+  return result.data;
+}
+
 export async function getUnitsList() {
   const result = await http.get("/unit/");
   return result.data;
@@ -23,6 +28,7 @@ export async function getMaterialsList() {
 export default {
   getMaterialLineItems,
   createMaterialLineItems,
+  deleteMaterialLineItem,
   getUnitsList,
   getMaterialsList,
 };

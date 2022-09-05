@@ -3,14 +3,21 @@ import masApiService from "./services/mashelperBackendService";
 
 function ViewData(props) {
   const [data, setData] = useState([]);
+
+  async function loadMaterialLineItems() {
+    const data = await masApiService.getMaterialLineItems();
+    console.log("data :>> ", data);
+    setData(data);
+  }
+
   useEffect(() => {
-    async function loadMaterialLineItems() {
-      const data = await masApiService.getMaterialLineItems();
-      console.log("data :>> ", data);
-      setData(data);
-    }
     loadMaterialLineItems();
   }, []);
+
+  const handleDelete = async (id) => {
+    await masApiService.deleteMaterialLineItem(id);
+    loadMaterialLineItems();
+  };
 
   return (
     <div className="container container-sm">
@@ -45,7 +52,10 @@ function ViewData(props) {
                 <td>
                   <div className="d-flex align-items-center flex-column">
                     <button className="btn btn-warning btn-sm m-1">Edit</button>
-                    <button className="btn btn-danger btn-sm m-1">
+                    <button
+                      className="btn btn-danger btn-sm m-1"
+                      onClick={() => handleDelete(item.id)}
+                    >
                       Delete
                     </button>
                   </div>
