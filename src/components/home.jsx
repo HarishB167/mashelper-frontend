@@ -112,9 +112,9 @@ function Home(props) {
   return (
     <div className="container container-sm">
       <div className="d-flex align-items-center">
-        <a className="btn btn-primary btn-sm m-2" href="">
+        <Link className="btn btn-primary btn-sm m-2" to="download-csv-data">
           Download Data in CSV
-        </a>
+        </Link>
         <Link className="btn btn-primary btn-sm m-2" to="view-data">
           View Data
         </Link>

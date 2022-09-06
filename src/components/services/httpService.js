@@ -26,4 +26,5 @@ export default {
   put: axios.put,
   delete: axios.delete,
   setAuthorizationToken,
+  baseURL: axios.defaults.baseURL,
 };

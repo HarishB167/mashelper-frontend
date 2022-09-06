@@ -35,6 +35,17 @@ export async function getMaterialsList() {
   return result.data;
 }
 
+export async function downloadCSVData(fromDate, toDate) {
+  const result = await http.get(
+    `/materiallineitems_csv/${fromDate}/${toDate}/`
+  );
+  return result.data;
+}
+
+export function getCSVDataDownloadURL(fromDate, toDate) {
+  return `${http.baseURL}/materiallineitems_csv/${fromDate}/${toDate}/`;
+}
+
 export default {
   getMaterialLineItems,
   createMaterialLineItems,
@@ -43,4 +54,6 @@ export default {
   getMaterialLineItem,
   getUnitsList,
   getMaterialsList,
+  downloadCSVData,
+  getCSVDataDownloadURL,
 };
