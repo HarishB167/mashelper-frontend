@@ -31,7 +31,7 @@ export async function getUnitsList() {
 }
 
 export async function getMaterialsList() {
-  const result = await http.get("/material");
+  const result = await http.get("/material/");
   return result.data;
 }
 

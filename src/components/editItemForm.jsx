@@ -27,6 +27,7 @@ function EditItemForm(props) {
     quantity: "",
     unit: "",
   });
+  const [showSpinner, setShowSpinner] = useState(true);
 
   const getMaterialIdForName = (list, name) => {
     const material = list.find((mat) => mat.name === name);
@@ -53,6 +54,7 @@ function EditItemForm(props) {
       setUnitsList(unitsList);
       setMaterialsList(materialsList);
       setCurrentItem(material);
+      setShowSpinner(false);
     }
     loadSelectListData();
   }, []);
@@ -70,6 +72,7 @@ function EditItemForm(props) {
 
   const handleSave = async (e) => {
     e.preventDefault();
+    setShowSpinner(true);
     if (validate()) {
       toast.error(JSON.stringify(validate()));
       return false;
@@ -84,13 +87,14 @@ function EditItemForm(props) {
       unit: "",
     });
     props.history.replace("/view-data");
+    setShowSpinner(false);
   };
 
   return (
     <form className="container conatiner-sm">
       <SpinnerWhileLoading
         className="d-flex flex-column align-items-center"
-        showSpinnerWhen={materialsList.length === 0}
+        showSpinnerWhen={showSpinner}
       >
         <label className="form-label mt-2 mb-0" htmlFor="date">
           Date of Issue/Consumption
