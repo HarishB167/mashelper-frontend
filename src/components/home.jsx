@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Joi from "joi-browser";
 import masApiService from "./services/mashelperBackendService";
+import SpinnerWhileLoading from "./common/spinnerWhileLoading";
 
 const schema = {
   date: Joi.string().required().label("Date"),
@@ -25,6 +26,7 @@ function Home(props) {
     unit: "",
   });
   const [itemList, setItemList] = useState([]);
+  const [showSpinner, setShowSpinner] = useState(true);
   const dateInput = useRef(null);
 
   useEffect(() => {
@@ -33,6 +35,7 @@ function Home(props) {
       const materialsList = await masApiService.getMaterialsList();
       setUnitsList(unitsList);
       setMaterialsList(materialsList);
+      setShowSpinner(false);
     }
     loadSelectListData();
   }, []);
@@ -46,9 +49,7 @@ function Home(props) {
     }
     setItemList([...itemList, { ...currentItem }]);
     setCurrentItem({
-      date: "",
-      location: "",
-      remarks: "",
+      ...currentItem,
       material_name: "",
       quantity: "",
       unit: "",
@@ -97,10 +98,12 @@ function Home(props) {
   const handleSave = async (e) => {
     e.preventDefault();
     if (itemList.length > 0) {
+      setShowSpinner(true);
       const data = await masApiService.createMaterialLineItems(itemList);
       setItemList([]);
       toast.success(`${data.length} consumption posted successfully`);
       dateInput.current.focus();
+      setShowSpinner(false);
     } else {
       toast.warn("Nothing to save.");
     }
@@ -108,13 +111,14 @@ function Home(props) {
 
   return (
     <div className="container container-sm">
-      <div>
+      <div className="d-flex align-items-center">
         <a className="btn btn-primary btn-sm m-2" href="">
           Download Data in CSV
         </a>
         <Link className="btn btn-primary btn-sm m-2" to="view-data">
           View Data
         </Link>
+        <SpinnerWhileLoading showSpinnerWhen={showSpinner} />
       </div>
       <form>
         <label className="form-label mt-2 mb-0" htmlFor="date">

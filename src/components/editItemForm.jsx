@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Joi from "joi-browser";
 import masApiService from "./services/mashelperBackendService";
+import SpinnerWhileLoading from "./common/spinnerWhileLoading";
 
 const schema = {
   id: Joi.optional(),
@@ -86,117 +87,122 @@ function EditItemForm(props) {
   };
 
   return (
-    <form>
-      <label className="form-label mt-2 mb-0" htmlFor="date">
-        Date of Issue/Consumption
-      </label>
-      <input
-        value={currentItem.date}
-        onChange={(e) =>
-          setCurrentItem({ ...currentItem, date: e.currentTarget.value })
-        }
-        className="form-control"
-        name="date"
-        type="date"
-        required
-      />
-      <label className="form-label mt-2 mb-0" htmlFor="location">
-        Location
-      </label>
-      <input
-        value={currentItem.location}
-        onChange={(e) =>
-          setCurrentItem({ ...currentItem, location: e.currentTarget.value })
-        }
-        className="form-control"
-        name="location"
-        type="text"
-        required
-      />
-      <label className="form-label" mt-2 mb-0 htmlFor="remarks">
-        Remarks
-      </label>
-      <input
-        value={currentItem.remarks}
-        onChange={(e) =>
-          setCurrentItem({ ...currentItem, remarks: e.currentTarget.value })
-        }
-        className="form-control"
-        name="remarks"
-        type="text"
-        required
-      />
-      <div className="row">
-        <fieldset className="col col-6">
-          <legend>Add Item</legend>
-          <label className="form-label mt-2 mb-0" htmlFor="material">
-            Material Name
-          </label>
-          <select
-            value={currentItem.material_name}
-            onChange={(e) =>
-              setCurrentItem({
-                ...currentItem,
-                material_name: e.currentTarget.value,
-              })
-            }
-            name="material"
-            className="form-control"
-            required
-          >
-            <option value="">Select material...</option>
-            {materialsList.map((mat) => (
-              <option key={mat.id} value={mat.id}>
-                {mat.name}
-              </option>
-            ))}
-          </select>
-          <label className="form-label mt-2 mb-0" htmlFor="quantity">
-            Quantity
-          </label>
-          <input
-            value={currentItem.quantity}
-            onChange={(e) =>
-              setCurrentItem({
-                ...currentItem,
-                quantity: e.currentTarget.value,
-              })
-            }
-            className="form-control"
-            name="quantity"
-            type="number"
-            min="0"
-            required
-          />
-          <label className="form-label mt-2 mb-0" htmlFor="unit">
-            Unit
-          </label>
-          <select
-            value={currentItem.unit}
-            onChange={(e) =>
-              setCurrentItem({ ...currentItem, unit: e.currentTarget.value })
-            }
-            className="form-control"
-            name="unit"
-            id="unit"
-            required
-          >
-            <option value="">Select unit...</option>
-            {unitsList.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.unit}
-              </option>
-            ))}
-          </select>
-          <button
-            onClick={handleSave}
-            disabled={validate()}
-            className="btn btn-primary btn-sm m-2"
-          >
-            Save
-          </button>
-        </fieldset>
-      </div>
+    <form className="container conatiner-sm">
+      <SpinnerWhileLoading
+        className="d-flex flex-column align-items-center"
+        showSpinnerWhen={materialsList.length === 0}
+      >
+        <label className="form-label mt-2 mb-0" htmlFor="date">
+          Date of Issue/Consumption
+        </label>
+        <input
+          value={currentItem.date}
+          onChange={(e) =>
+            setCurrentItem({ ...currentItem, date: e.currentTarget.value })
+          }
+          className="form-control"
+          name="date"
+          type="date"
+          required
+        />
+        <label className="form-label mt-2 mb-0" htmlFor="location">
+          Location
+        </label>
+        <input
+          value={currentItem.location}
+          onChange={(e) =>
+            setCurrentItem({ ...currentItem, location: e.currentTarget.value })
+          }
+          className="form-control"
+          name="location"
+          type="text"
+          required
+        />
+        <label className="form-label" mt-2 mb-0 htmlFor="remarks">
+          Remarks
+        </label>
+        <input
+          value={currentItem.remarks}
+          onChange={(e) =>
+            setCurrentItem({ ...currentItem, remarks: e.currentTarget.value })
+          }
+          className="form-control"
+          name="remarks"
+          type="text"
+          required
+        />
+        <div className="row">
+          <fieldset className="col col-6">
+            <legend>Add Item</legend>
+            <label className="form-label mt-2 mb-0" htmlFor="material">
+              Material Name
+            </label>
+            <select
+              value={currentItem.material_name}
+              onChange={(e) =>
+                setCurrentItem({
+                  ...currentItem,
+                  material_name: e.currentTarget.value,
+                })
+              }
+              name="material"
+              className="form-control"
+              required
+            >
+              <option value="">Select material...</option>
+              {materialsList.map((mat) => (
+                <option key={mat.id} value={mat.id}>
+                  {mat.name}
+                </option>
+              ))}
+            </select>
+            <label className="form-label mt-2 mb-0" htmlFor="quantity">
+              Quantity
+            </label>
+            <input
+              value={currentItem.quantity}
+              onChange={(e) =>
+                setCurrentItem({
+                  ...currentItem,
+                  quantity: e.currentTarget.value,
+                })
+              }
+              className="form-control"
+              name="quantity"
+              type="number"
+              min="0"
+              required
+            />
+            <label className="form-label mt-2 mb-0" htmlFor="unit">
+              Unit
+            </label>
+            <select
+              value={currentItem.unit}
+              onChange={(e) =>
+                setCurrentItem({ ...currentItem, unit: e.currentTarget.value })
+              }
+              className="form-control"
+              name="unit"
+              id="unit"
+              required
+            >
+              <option value="">Select unit...</option>
+              {unitsList.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.unit}
+                </option>
+              ))}
+            </select>
+            <button
+              onClick={handleSave}
+              disabled={validate()}
+              className="btn btn-primary btn-sm m-2"
+            >
+              Save
+            </button>
+          </fieldset>
+        </div>
+      </SpinnerWhileLoading>
     </form>
   );
 }
