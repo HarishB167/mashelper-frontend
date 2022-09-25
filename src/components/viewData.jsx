@@ -47,7 +47,7 @@ function ViewData(props) {
               <th></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="tableBody">
             {data.map((item, idx) => (
               <React.Fragment>
                 <tr key={`${idx}`}>
@@ -87,7 +87,11 @@ function ViewData(props) {
                 </tr>
                 <tr key={`${idx}_collapse`}>
                   <td colSpan="4" className="p-0">
-                    <div id={`collapse${idx}`} className="collapse">
+                    <div
+                      id={`collapse${idx}`}
+                      className="collapse"
+                      data-bs-parent="#tableBody"
+                    >
                       <div className="card card-body">
                         <div>
                           <strong>Location : </strong>
