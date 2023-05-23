@@ -31,13 +31,8 @@ function NavBar(props) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link nav-link__color_white" to="#">
+              <Link className="nav-link nav-link__color_white" to="/about">
                 About
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link nav-link__color_white" to="#">
-                Help
               </Link>
             </li>
           </ul>

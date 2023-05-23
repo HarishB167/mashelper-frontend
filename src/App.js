@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import About from "./components/about";
 import NavBar from "./components/common/navBar";
 import CSVDataDownloadForm from "./components/CSVDataDownloadForm";
 import EditItemForm from "./components/editItemForm";
@@ -21,6 +22,7 @@ function App() {
           exact
           component={CSVDataDownloadForm}
         />
+        <Route path="/about" exact component={About} />
         <Route path="/" exact component={Home} />
       </Switch>
     </div>
